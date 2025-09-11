@@ -65,10 +65,10 @@ interface Avatar {
   className?: string;
 }
 
-
 interface SavedMessage {
   role: "user" | "system" | "assistant";
   content: string;
+  timestamp?: number;
 }
 
 interface CompanionComponentProps {

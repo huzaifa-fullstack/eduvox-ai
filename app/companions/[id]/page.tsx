@@ -1,3 +1,4 @@
+import CompanionComponent from "@/components/CompanionComponent";
 import { getCompanion } from "@/lib/actions/companion.actions";
 import { getSubjectColor } from "@/lib/utils";
 import { currentUser } from "@clerk/nextjs/server";
@@ -10,8 +11,10 @@ interface CompanionSessionPageProps {
 
 const CompanionSession = async ({ params }: CompanionSessionPageProps) => {
   const { id } = await params;
-  const { name, subject, title, topic, duration } = await getCompanion(id);
+  const companion = await getCompanion(id);
   const user = await currentUser();
+
+  const { name, subject, title, topic, duration } = companion;
 
   if (!user) redirect("/sign-in");
   if (!name) redirect("/companions");
@@ -34,9 +37,7 @@ const CompanionSession = async ({ params }: CompanionSessionPageProps) => {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <p className="font-bold text-2xl">{name}</p>
-              <div className="subject-badge max-sm:hidden">
-                {subject}
-              </div>
+              <div className="subject-badge max-sm:hidden">{subject}</div>
             </div>
             <p className="text-lg">{topic}</p>
           </div>
@@ -45,6 +46,12 @@ const CompanionSession = async ({ params }: CompanionSessionPageProps) => {
           {duration} minutes
         </div>
       </article>
+      <CompanionComponent
+        {...companion}
+        companionid={id}
+        userName={user.firstName!}
+        userImage={user.imageUrl!}
+      />
     </main>
   );
 };
