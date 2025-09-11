@@ -7,6 +7,7 @@ import soundwaves from "@/constants/soundwaves.json";
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 import { Message } from "@/types/vapi";
+import { addToSessionHistory } from "@/lib/actions/companion.actions";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -48,7 +49,14 @@ const CompanionComponent = ({
   useEffect(() => {
     const onCallStart = () => setCallStatus(CallStatus.ACTIVE);
 
-    const onCallEnd = () => setCallStatus(CallStatus.FINISHED);
+    const onCallEnd = async () => {
+      setCallStatus(CallStatus.FINISHED);
+      try {
+        await addToSessionHistory(companionId);
+      } catch (error) {
+        console.error("Failed to save session history:", error);
+      }
+    };
 
     const onMessage = (message: Message) => {
       if (message.type === "transcript" && message.transcriptType === "final") {
@@ -167,14 +175,18 @@ const CompanionComponent = ({
             />
             <p className="font-bold text-2xl">{userName}</p>
           </div>
-          <button className="btn-mic" onClick={toggleMicrophone} disabled={callStatus !== CallStatus.ACTIVE}>
+          <button
+            className="btn-mic"
+            onClick={toggleMicrophone}
+            disabled={callStatus !== CallStatus.ACTIVE}
+          >
             <Image
               src={isMuted ? `/icons/mic-off.svg` : `/icons/mic-on.svg`}
               alt="mic"
               width={36}
               height={36}
             />
-            <p className="max-sm:hidden" >
+            <p className="max-sm:hidden">
               {isMuted ? "Turn on microphone" : "Turn off microphone"}
             </p>
           </button>
