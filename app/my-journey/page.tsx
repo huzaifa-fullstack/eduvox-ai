@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import {
   getUserCompanions,
   getUserSessions,
+  getUserBookmarks,
 } from "@/lib/actions/companion.actions";
 import Image from "next/image";
 import CompanionsList from "@/components/CompanionsList";
@@ -20,6 +21,7 @@ const Profile = async () => {
 
   const companions = await getUserCompanions(user.id);
   const sessionHistory = await getUserSessions(user.id);
+  const bookmarkedCompanions = await getUserBookmarks(user.id);
 
   return (
     <main className="min-lg:w-3/4">
@@ -63,9 +65,37 @@ const Profile = async () => {
             </div>
             <div>Companions created</div>
           </div>
+
+          <div className="border border-black rounded-lg p-3 gap-2 flex flex-col h-fit">
+            <div className="flex gap-2 items-center">
+              <Image
+                src="/icons/bookmark-filled.svg"
+                alt="bookmark"
+                width={22}
+                height={22}
+              />
+              <p className="text-2xl font-bold">
+                {bookmarkedCompanions.length}
+              </p>
+            </div>
+            <div>Bookmarked</div>
+          </div>
         </div>
       </section>
       <Accordion type="multiple">
+        <AccordionItem value="bookmarks">
+          <AccordionTrigger className="text-2xl font-bold">
+            Bookmarked Companions
+          </AccordionTrigger>
+
+          <AccordionContent>
+            <CompanionsList
+              title="Bookmarked Companions"
+              companions={bookmarkedCompanions}
+            />
+          </AccordionContent>
+        </AccordionItem>
+
         <AccordionItem value="recent">
           <AccordionTrigger className="text-2xl font-bold">
             Recent Sessions
