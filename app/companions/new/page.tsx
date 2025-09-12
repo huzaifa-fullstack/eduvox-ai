@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const NewCompanion = async () => {
   const { userId } = await auth();
-  if (!userId) redirect("/sign-in");
+  if (!userId) redirect("/sign-in?redirect_url=/companions/new");
 
   const canCreateCompanion = await newCompanionPermissions();
 

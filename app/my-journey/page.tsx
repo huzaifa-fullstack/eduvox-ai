@@ -17,7 +17,7 @@ import CompanionsList from "@/components/CompanionsList";
 const Profile = async () => {
   const user = await currentUser();
 
-  if (!user) redirect("/sign-in");
+  if (!user) redirect("/sign-in?redirect_url=/my-journey");
 
   const companions = await getUserCompanions(user.id);
   const sessionHistory = await getUserSessions(user.id);
