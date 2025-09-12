@@ -10,16 +10,20 @@ const navItems = [
   { label: "My Journey", href: "/my-journey" },
 ];
 
-const NavItems = () => {
+const NavItems = ({ onItemClick }: { onItemClick?: () => void }) => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center gap-4">
+    <nav className="flex items-center gap-4 md:gap-4 max-md:flex-col max-md:gap-3 max-md:w-full">
       {navItems.map(({ label, href }) => (
         <Link
           href={href}
           key={label}
-          className={cn(pathname === href && "text-primary font-semibold")}
+          onClick={onItemClick}
+          className={cn(
+            "max-md:text-base max-md:py-2 max-md:w-full max-md:text-left",
+            pathname === href && "text-primary font-semibold"
+          )}
         >
           {label}
         </Link>
