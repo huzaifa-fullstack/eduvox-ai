@@ -5,8 +5,7 @@ const Subscription = () => {
     <main>
       <PricingTable />
     </main>
-  )
-}
-
+  );
+};
 
 export default Subscription;

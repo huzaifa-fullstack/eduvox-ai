@@ -35,12 +35,10 @@ const CompanionCard = ({
   } | null>(null);
 
   const handleBookmarkToggle = () => {
-    // Do nothing if user is not signed in
     if (!isSignedIn) {
       return;
     }
 
-    // Optimistic update
     const previousState = isBookmarked;
     setIsBookmarked(!isBookmarked);
 
@@ -55,7 +53,6 @@ const CompanionCard = ({
         }
       } catch (error) {
         console.error("Error toggling bookmark:", error);
-        // Revert the optimistic update on error
         setIsBookmarked(previousState);
         setToast({
           message:

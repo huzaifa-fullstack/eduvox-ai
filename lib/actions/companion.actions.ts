@@ -48,7 +48,6 @@ export const getAllCompanions = async ({
 
   if (error) throw new Error(error.message);
 
-  // If user is authenticated, check for bookmarks
   if (userId && companions) {
     const companionIds = companions.map((companion) => companion.id);
 
@@ -70,7 +69,6 @@ export const getAllCompanions = async ({
     }
   }
 
-  // If no user or no bookmarks, return companions with bookmarked: false
   return (
     companions?.map((companion) => ({
       ...companion,
@@ -101,7 +99,6 @@ export const addToSessionHistory = async (companionId: string) => {
 
   const supabase = createSupabaseClient();
 
-  // First verify that the companion exists
   const { data: companion, error: companionError } = await supabase
     .from("companions")
     .select("id")
@@ -200,7 +197,6 @@ export const addBookmark = async (companionId: string) => {
 
   const supabase = createSupabaseClient();
 
-  // First verify that the companion exists
   const { data: companion, error: companionError } = await supabase
     .from("companions")
     .select("id")
@@ -211,7 +207,6 @@ export const addBookmark = async (companionId: string) => {
     throw new Error(`Companion with ID ${companionId} not found`);
   }
 
-  // Check if bookmark already exists
   const { data: existingBookmark, error: checkError } = await supabase
     .from("bookmarks")
     .select("id")

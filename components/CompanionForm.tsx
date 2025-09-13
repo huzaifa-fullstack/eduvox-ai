@@ -157,7 +157,7 @@ const containsContextualInappropriateContent = (
     const foundRestrictedWord = words.some((word) => lowerText.includes(word));
 
     if (foundRestrictedWord && lowerSubject !== allowedSubject) {
-      return true; // Word found but not in appropriate subject context
+      return true;
     }
   }
 
@@ -250,14 +250,12 @@ const subjectKeywords = {
 };
 
 const isTopicRelevantToSubject = (subject: string, topic: string): boolean => {
-  if (!subject || !topic) return true; // Allow validation to pass if either is empty
+  if (!subject || !topic) return true;
 
   const lowerTopic = topic.toLowerCase();
   const lowerSubject = subject.toLowerCase();
   const keywords =
     subjectKeywords[lowerSubject as keyof typeof subjectKeywords] || [];
-
-  // More flexible validation approach:
 
   // 1. Direct subject name match
   if (lowerTopic.includes(lowerSubject)) {
@@ -329,7 +327,7 @@ const isTopicRelevantToSubject = (subject: string, topic: string): boolean => {
 
   // 5. Length-based flexibility - longer descriptions are likely educational
   if (topic.trim().length > 50) {
-    return true; // Assume detailed descriptions are educational
+    return true;
   }
 
   // 6. Question format detection - educational questions

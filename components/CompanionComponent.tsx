@@ -63,7 +63,7 @@ const CompanionComponent = ({
         const newMessage = {
           role: message.role,
           content: message.transcript,
-          timestamp: Date.now(), // Add timestamp for unique keys
+          timestamp: Date.now(),
         };
         setMessages((prev) => [newMessage, ...prev]);
       }

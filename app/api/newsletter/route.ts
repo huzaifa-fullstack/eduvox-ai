@@ -22,9 +22,10 @@ export async function POST(request: NextRequest) {
     if (!process.env.BUTTONDOWN_API_KEY) {
       console.log(`📧 Newsletter signup (Buttondown not configured): ${email}`);
       return NextResponse.json(
-        { 
-          message: "Newsletter signup received! We'll add you once our email service is ready.",
-          email: email 
+        {
+          message:
+            "Newsletter signup received! We'll add you once our email service is ready.",
+          email: email,
         },
         { status: 200 }
       );
@@ -32,26 +33,30 @@ export async function POST(request: NextRequest) {
 
     // Subscribe to Buttondown
     try {
-      const response = await fetch("https://api.buttondown.com/v1/subscribers", {
-        method: "POST",
-        headers: {
-          "Authorization": `Token ${process.env.BUTTONDOWN_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          metadata: {
-            source: "website-footer",
-            subscribed_at: new Date().toISOString()
-          }
-        }),
-      });
+      const response = await fetch(
+        "https://api.buttondown.com/v1/subscribers",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Token ${process.env.BUTTONDOWN_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            metadata: {
+              source: "website-footer",
+              subscribed_at: new Date().toISOString(),
+            },
+          }),
+        }
+      );
 
       if (response.ok) {
         return NextResponse.json(
-          { 
-            message: "🎉 Successfully subscribed! Welcome to EduVox newsletter.",
-            email: email 
+          {
+            message:
+              "🎉 Successfully subscribed! Welcome to EduVox newsletter.",
+            email: email,
           },
           { status: 200 }
         );
@@ -70,14 +75,14 @@ export async function POST(request: NextRequest) {
     } catch (buttondownError) {
       console.error("Buttondown subscription error:", buttondownError);
       return NextResponse.json(
-        { 
-          message: "Newsletter signup received! We'll add you once our email service is ready.",
-          email: email 
+        {
+          message:
+            "Newsletter signup received! We'll add you once our email service is ready.",
+          email: email,
         },
         { status: 200 }
       );
     }
-
   } catch (error) {
     console.error("Newsletter subscription error:", error);
     return NextResponse.json(
