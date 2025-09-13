@@ -76,6 +76,7 @@ const Footer = () => {
     platform: {
       title: "Platform",
       links: [
+        { label: "Home", href: "/" },
         { label: "Companions", href: "/companions" },
         { label: "My Journey", href: "/my-journey" },
         { label: "Create Companion", href: "/companions/new" },
