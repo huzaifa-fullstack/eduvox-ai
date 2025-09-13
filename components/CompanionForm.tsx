@@ -524,7 +524,7 @@ const CompanionForm = () => {
         <Button
           type="submit"
           size="lg"
-          className="w-full cursor-pointer py-4 text-base"
+          className="w-full cursor-pointer py-4 text-base bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 transition-colors duration-200"
         >
           Build Your Companion
         </Button>

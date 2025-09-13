@@ -39,8 +39,8 @@ const Profile = async () => {
 
   return (
     <main className="min-lg:w-3/4">
-      <section className="flex justify-between gap-4 max-lg:flex-col max-lg:items-center max-sm:items-start max-sm:flex-col items-center">
-        <div className="flex gap-4 items-center max-lg:flex-col max-lg:items-center max-lg:text-center max-sm:flex-row max-sm:items-center max-sm:text-left">
+      <section className="flex justify-between gap-4 max-lg:flex-col max-lg:items-start max-sm:flex-col items-center">
+        <div className="flex gap-4 items-center">
           <Image
             src={user.imageUrl}
             alt={user.firstName!}
