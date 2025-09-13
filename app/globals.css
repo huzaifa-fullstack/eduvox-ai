@@ -141,19 +141,39 @@ body {
 
 @layer components {
   .home-section {
-    @apply flex gap-4 justify-between items-start w-full max-lg:flex-col-reverse max-lg:items-center;
+    @apply flex gap-8 justify-between items-start w-full max-lg:flex-col-reverse max-lg:items-center max-lg:gap-6;
   }
   .companions-grid {
     @apply flex flex-wrap gap-4 w-full max-md:justify-center;
   }
   .companion-card {
     @apply flex flex-col rounded-4xl border border-black px-4 py-4 gap-5 w-full min-lg:max-w-[410px] justify-between;
+    /* Consistent height for responsiveness */
+    min-height: 280px;
+  }
+
+  /* Ensure equal height and proper distribution for cards in row layout (1024px and above) */
+  @media (min-width: 1024px) {
+    .home-section:first-child {
+      align-items: stretch !important;
+    }
+    .home-section:first-child .companion-card {
+      flex: 1;
+      height: 100%;
+      max-width: calc(33.333% - 1rem);
+      min-height: 300px;
+    }
   }
   .subject-badge {
-    @apply bg-black text-white rounded-4xl text-sm px-2 py-1 capitalize;
+    @apply bg-black text-white rounded-4xl text-base px-4 py-2 capitalize font-medium;
+  }
+
+  /* Smaller subject badges for companion cards */
+  .companion-card .subject-badge {
+    @apply text-sm px-3 py-1.5 font-normal;
   }
   .companion-bookmark {
-    @apply px-2 bg-black rounded-4xl flex items-center h-full aspect-square cursor-pointer;
+    @apply px-2 bg-black rounded-4xl flex items-center justify-center h-8 w-8 cursor-pointer;
   }
   .input {
     @apply !border-black !bg-white focus-visible:!ring-0 focus-visible:!border-black !w-full;
@@ -161,14 +181,36 @@ body {
   .rounded-border {
     @apply rounded-4xl border border-black;
   }
+  .companions-list {
+    @apply rounded-4xl border border-black px-7 pt-7 pb-10 max-lg:w-full bg-white;
+  }
+  .companions-list h2 {
+    @apply mb-6;
+  }
   .cta-section {
     @apply bg-cta text-white rounded-4xl px-7 py-10 flex flex-col items-center text-center gap-5 w-1/3 max-lg:w-1/2 max-md:w-full;
+  }
+
+  /* Fix for 1122px to 1024px range to prevent button text wrapping */
+  @media (min-width: 1024px) and (max-width: 1122px) {
+    .cta-section {
+      width: 45%;
+    }
+    .cta-section .btn-primary {
+      font-size: 0.9rem;
+      padding: 0.625rem 1rem;
+      white-space: nowrap;
+    }
+  }
+
+  .cta-section .btn-primary {
+    @apply w-full max-w-md;
   }
   .cta-badge {
     @apply bg-cta-gold rounded-4xl px-3 py-1.5 text-black;
   }
   .btn-primary {
-    @apply bg-primary text-white rounded-xl cursor-pointer px-4 py-2 flex items-center gap-2;
+    @apply bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-3xl cursor-pointer px-6 py-3 flex items-center gap-2 font-medium justify-center hover:from-orange-600 hover:to-red-600 transition-colors duration-200;
   }
   .navbar {
     @apply flex items-center justify-between mx-auto w-full px-14 py-4 max-sm:px-4;
@@ -303,5 +345,15 @@ body {
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Text truncation utilities for consistent card heights */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
   }
 }

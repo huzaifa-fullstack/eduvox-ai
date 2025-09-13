@@ -23,6 +23,20 @@ const Profile = async () => {
   const sessionHistory = await getUserSessions(user.id);
   const bookmarkedCompanions = await getUserBookmarks(user.id);
 
+  // Debug: Check for duplicates
+  console.log("Companions count:", companions.length);
+  console.log("Session history count:", sessionHistory.length);
+  console.log("Bookmarked count:", bookmarkedCompanions.length);
+
+  // Check for duplicate IDs in companions array
+  const companionIds = companions.map((c) => c.id);
+  const duplicateCompanionIds = companionIds.filter(
+    (id, index) => companionIds.indexOf(id) !== index
+  );
+  if (duplicateCompanionIds.length > 0) {
+    console.log("Duplicate companion IDs found:", duplicateCompanionIds);
+  }
+
   return (
     <main className="min-lg:w-3/4">
       <section className="flex justify-between gap-4 max-sm:flex-col items-center">
@@ -92,6 +106,7 @@ const Profile = async () => {
             <CompanionsList
               title="Bookmarked Companions"
               companions={bookmarkedCompanions}
+              keyPrefix="bookmarked"
             />
           </AccordionContent>
         </AccordionItem>
@@ -105,6 +120,7 @@ const Profile = async () => {
             <CompanionsList
               title="Recent Sessions"
               companions={sessionHistory}
+              keyPrefix="recent"
             />
           </AccordionContent>
         </AccordionItem>
@@ -115,7 +131,11 @@ const Profile = async () => {
           </AccordionTrigger>
 
           <AccordionContent>
-            <CompanionsList title="My Companions" companions={companions} />
+            <CompanionsList
+              title="My Companions"
+              companions={companions}
+              keyPrefix="my-companions"
+            />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
