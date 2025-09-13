@@ -18,14 +18,12 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@sentry/nextjs": "^10.11.0",
     "@supabase/supabase-js": "^2.57.4",
-    "@types/nodemailer": "^7.0.1",
     "@vapi-ai/web": "^2.3.10",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.542.0",
     "next": "15.5.2",
-    "nodemailer": "^7.0.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",
@@ -41,7 +39,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "tailwindcss": "^4",
-    "tw-animate-css": "^1.3.8",
     "typescript": "^5"
   }
 }
