@@ -39,8 +39,8 @@ const Profile = async () => {
 
   return (
     <main className="min-lg:w-3/4">
-      <section className="flex justify-between gap-4 max-lg:flex-col max-lg:items-start max-sm:flex-col items-center">
-        <div className="flex gap-4 items-center">
+      <section className="flex justify-between gap-4 max-lg:flex-col max-lg:items-center max-sm:items-start max-sm:flex-col items-center">
+        <div className="flex gap-4 items-center max-lg:flex-col max-lg:items-center max-lg:text-center max-sm:flex-row max-sm:items-center max-sm:text-left">
           <Image
             src={user.imageUrl}
             alt={user.firstName!}
@@ -129,7 +129,7 @@ const Profile = async () => {
 
           <AccordionContent>
             <CompanionsList
-              title="Bookmarked Companions"
+              title=""
               companions={bookmarkedCompanions}
               keyPrefix="bookmarked"
             />
@@ -143,7 +143,7 @@ const Profile = async () => {
 
           <AccordionContent>
             <CompanionsList
-              title="Recent Sessions"
+              title=""
               companions={sessionHistory}
               keyPrefix="recent"
             />
@@ -157,7 +157,7 @@ const Profile = async () => {
 
           <AccordionContent>
             <CompanionsList
-              title="My Companions"
+              title=""
               companions={companions}
               keyPrefix="my-companions"
             />
