@@ -39,7 +39,7 @@ const Profile = async () => {
 
   return (
     <main className="min-lg:w-3/4">
-      <section className="flex justify-between gap-4 max-sm:flex-col items-center">
+      <section className="flex justify-between gap-4 max-lg:flex-col max-lg:items-start max-sm:flex-col items-center">
         <div className="flex gap-4 items-center">
           <Image
             src={user.imageUrl}
@@ -52,47 +52,72 @@ const Profile = async () => {
             <h1 className="font-bold text-2xl">
               {user.firstName} {user.lastName}
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground break-all">
               {user.emailAddresses[0].emailAddress}
             </p>
           </div>
         </div>
 
-        <div className="flex gap-4">
-          <div className="border border-black rounded-lg p-3 gap-2 flex flex-col h-fit">
-            <div className="flex gap-2 items-center">
+        <div className="flex gap-4 w-full max-w-md max-lg:max-w-full max-lg:justify-center">
+          <div className="stat-box">
+            <div className="flex gap-2 items-center justify-center">
               <Image
                 src="/icons/check.svg"
                 alt="checkmark"
                 width={22}
                 height={22}
               />
-              <p className="text-2xl font-bold">{sessionHistory.length}</p>
+              <p className="stat-number">{sessionHistory.length}</p>
             </div>
-            <div>Lessons completed</div>
+            <div className="stat-label">Lessons completed</div>
           </div>
 
-          <div className="border border-black rounded-lg p-3 gap-2 flex flex-col h-fit">
-            <div className="flex gap-2 items-center">
+          <div className="stat-box">
+            <div className="flex gap-2 items-center justify-center">
               <Image src="/icons/cap.svg" alt="cap" width={22} height={22} />
-              <p className="text-2xl font-bold">{companions.length}</p>
+              <p className="stat-number">{companions.length}</p>
             </div>
-            <div>Companions created</div>
+            <div className="stat-label">Companions created</div>
           </div>
 
-          <div className="border border-black rounded-lg p-3 gap-2 flex flex-col h-fit">
-            <div className="flex gap-2 items-center">
-              <Image
-                src="/icons/bookmark-filled.svg"
-                alt="bookmark"
-                width={22}
-                height={22}
-              />
-              <p className="text-2xl font-bold">
-                {bookmarkedCompanions.length}
-              </p>
+          <div className="stat-box">
+            <div className="flex gap-2 items-center justify-center">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient
+                    id="bookmarkGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop
+                      offset="0%"
+                      style={{ stopColor: "#ff4444", stopOpacity: 1 }}
+                    />
+                    <stop
+                      offset="100%"
+                      style={{ stopColor: "#ff6b35", stopOpacity: 1 }}
+                    />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M6 2C5.44772 2 5 2.44772 5 3V21C5 21.3688 5.20656 21.7077 5.53553 21.8536C5.86449 21.9994 6.24558 21.9329 6.50735 21.6889L12 16.7639L17.4926 21.6889C17.7544 21.9329 18.1355 21.9994 18.4645 21.8536C18.7934 21.7077 19 21.3688 19 21V3C19 2.44772 18.5523 2 18 2H6Z"
+                  fill="none"
+                  stroke="url(#bookmarkGradient)"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <p className="stat-number">{bookmarkedCompanions.length}</p>
             </div>
-            <div>Bookmarked</div>
+            <div className="stat-label">Bookmarked</div>
           </div>
         </div>
       </section>
