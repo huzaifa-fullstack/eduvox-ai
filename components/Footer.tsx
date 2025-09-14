@@ -345,7 +345,7 @@ const Footer = () => {
                 },
                 {
                   name: "LinkedIn",
-                  href: "https://www.linkedin.com/in/muhammad-huzaifa-karim-590k",
+                  href: "https://www.linkedin.com",
                   icon: (
                     <svg
                       className="w-5 h-5"
@@ -358,7 +358,7 @@ const Footer = () => {
                 },
                 {
                   name: "GitHub",
-                  href: "https://github.com/huzaifakarim1",
+                  href: "https://github.com",
                   icon: (
                     <svg
                       className="w-5 h-5"
