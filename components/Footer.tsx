@@ -62,7 +62,7 @@ const Footer = () => {
           type: "error",
         });
       }
-    } catch (error) {
+    } catch {
       setToast({
         message: "Failed to subscribe. Please try again.",
         type: "error",

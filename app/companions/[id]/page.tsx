@@ -30,7 +30,7 @@ const CompanionSession = async ({ params }: CompanionSessionPageProps) => {
   const canStartConversation = await checkMonthlyConversationLimit(user.id);
   const currentConversationCount = await getMonthlyConversationCount(user.id);
 
-  const { name, subject, title, topic, duration } = companion;
+  const { name, subject, topic, duration } = companion;
 
   // If user has reached conversation limits, show upgrade message
   if (!canStartConversation) {
@@ -67,7 +67,7 @@ const CompanionSession = async ({ params }: CompanionSessionPageProps) => {
             Monthly Conversation Limit Reached
           </h3>
           <p className="text-gray-700 mb-6 max-w-md leading-relaxed">
-            You've completed {currentConversationCount} out of 10 conversations
+            You&apos;ve completed {currentConversationCount} out of 10 conversations
             this month with your Basic plan. Upgrade to Core or Pro for
             unlimited conversations!
           </p>

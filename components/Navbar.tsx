@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import NavItems from "./NavItems";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -142,7 +142,9 @@ const Navbar = () => {
         <div className="flex items-center gap-8">
           {/* Desktop Navigation - hidden on mobile */}
           <div className="hidden md:flex">
-            <NavItems />
+            <Suspense fallback={<div></div>}>
+              <NavItems />
+            </Suspense>
           </div>
 
           <SignedOut>
@@ -219,7 +221,9 @@ const Navbar = () => {
           style={{ top: isScrolled ? "68px" : "80px" }}
         >
           <div className="px-4 py-4">
-            <NavItems onItemClick={() => setIsMobileMenuOpen(false)} />
+            <Suspense fallback={<div></div>}>
+              <NavItems onItemClick={() => setIsMobileMenuOpen(false)} />
+            </Suspense>
           </div>
         </div>
       )}

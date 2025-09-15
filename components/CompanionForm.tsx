@@ -467,8 +467,8 @@ const CompanionForm = () => {
                 />
               </FormControl>
               <FormDescription className="text-sm text-gray-600">
-                Be specific about what you want to learn. Example: "Learn
-                calculus derivatives"
+                Be specific about what you want to learn. Example: &quot;Learn
+                calculus derivatives&quot;
               </FormDescription>
               <FormMessage />
             </FormItem>
