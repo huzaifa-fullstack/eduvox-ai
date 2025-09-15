@@ -91,7 +91,7 @@
 
 body {
   font-family: var(--font-bricolage);
-  padding-top: 80px; /* Account for fixed navbar */
+  padding-top: 80px;
 }
 
 .dark {
@@ -136,7 +136,7 @@ body {
     @apply bg-background text-foreground;
   }
   main {
-    @apply mx-auto px-14 flex flex-col gap-8 bg-background h-full max-w-[1400px] pt-10 max-sm:px-2;
+    @apply mx-auto px-14 flex flex-col gap-8 bg-background h-full max-w-[1400px] pt-2 max-sm:px-2;
   }
   h1 {
     @apply text-3xl font-bold;
@@ -150,12 +150,14 @@ body {
   .companions-grid {
     @apply flex flex-wrap gap-4 w-full max-md:justify-center;
   }
+  .companions-grid > div:only-child {
+    @apply flex-grow;
+  }
   .companion-card {
     @apply flex flex-col rounded-4xl border border-black px-4 py-4 gap-5 w-full min-lg:max-w-[410px] justify-between;
     min-height: 280px;
   }
 
-  /* Ensure equal height and proper distribution for cards in row layout (1024px and above) */
   @media (min-width: 1024px) {
     .home-section:first-child {
       align-items: stretch !important;
@@ -171,7 +173,6 @@ body {
     @apply bg-black text-white rounded-4xl text-base px-4 py-2 capitalize font-medium;
   }
 
-  /* Smaller subject badges for companion cards */
   .companion-card .subject-badge {
     @apply text-sm px-3 py-1.5 font-normal;
   }
@@ -358,7 +359,6 @@ body {
     scrollbar-width: none;
   }
 
-  /* Text truncation utilities for consistent card heights */
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -366,5 +366,27 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     word-wrap: break-word;
+  }
+
+  .mobile-menu-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  .mobile-menu-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .mobile-menu-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 }
