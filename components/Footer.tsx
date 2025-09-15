@@ -52,7 +52,7 @@ const Footer = () => {
 
       if (response.ok) {
         setToast({
-          message: "Subscribed! Check your email for confirmation.",
+          message: "Successfully subscribed! You'll receive our newsletter.",
           type: "success",
         });
         setEmail("");
@@ -109,10 +109,8 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-slate-50 to-white border-t border-slate-200 mt-20">
       <div className="mx-auto px-4 sm:px-6 lg:px-14 py-16 max-w-[1400px]">
-        {/* Header Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           <div className="space-y-6">
-            {/* Logo and Brand */}
             <Link href="/" className="flex items-center gap-4 group">
               <svg
                 width="140"
@@ -156,15 +154,12 @@ const Footer = () => {
                   </linearGradient>
                 </defs>
 
-                {/* Icon container */}
                 <g transform="translate(2, 4)">
-                  {/* Modern geometric shapes */}
                   <path
                     d="M4 8 L20 4 Q28 6, 28 16 Q28 26, 20 28 L4 24 Q0 20, 0 16 Q0 12, 4 8 Z"
                     fill="url(#footerPrimaryGradient)"
                   />
 
-                  {/* Dynamic wave element */}
                   <path
                     d="M6 16 Q12 10, 18 16 Q24 22, 30 16"
                     stroke="url(#footerSecondaryGradient)"
@@ -180,7 +175,6 @@ const Footer = () => {
                     opacity="0.7"
                   />
 
-                  {/* Modern dots accent */}
                   <circle cx="10" cy="12" r="1.5" fill="white" opacity="0.8" />
                   <circle
                     cx="14"
@@ -192,7 +186,6 @@ const Footer = () => {
                   <circle cx="18" cy="12" r="1.2" fill="white" opacity="0.6" />
                 </g>
 
-                {/* Text */}
                 <g transform="translate(44, 8)">
                   <text
                     x="0"
@@ -244,7 +237,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Links Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           {Object.entries(footerSections).map(([key, section]) => (
             <div key={key} className="space-y-4">
@@ -272,7 +264,6 @@ const Footer = () => {
             </div>
           ))}
 
-          {/* Newsletter Section */}
           <div className="space-y-4 md:col-span-1">
             <h4 className="font-bold text-gray-900 text-lg">Stay Updated</h4>
             <p className="text-gray-600 text-sm mb-4">
@@ -307,7 +298,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-slate-200 gap-6">
           <div className="flex flex-col md:flex-row md:items-center gap-4 text-center md:text-left">
             <p className="text-gray-600 text-sm">
@@ -386,7 +376,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Toast Notification */}
       {toast && (
         <Toast
           message={toast.message}
