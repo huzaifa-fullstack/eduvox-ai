@@ -10,6 +10,7 @@ import {
   getUserCompanions,
   getUserSessions,
   getUserBookmarks,
+  getUserLifetimeStats,
 } from "@/lib/actions/companion.actions";
 import Image from "next/image";
 import CompanionsList from "@/components/CompanionsList";
@@ -23,10 +24,17 @@ const Profile = async () => {
   const sessionHistory = await getUserSessions(user.id);
   const bookmarkedCompanions = await getUserBookmarks(user.id);
 
-  // Debug: Check for duplicates
-  console.log("Companions count:", companions.length);
-  console.log("Session history count:", sessionHistory.length);
-  console.log("Bookmarked count:", bookmarkedCompanions.length);
+  // Get lifetime stats for display
+  let lifetimeStats;
+  try {
+    lifetimeStats = await getUserLifetimeStats(user.id);
+  } catch (error) {
+    console.error("❌ Error fetching lifetime stats:", error);
+    lifetimeStats = {
+      totalCompanionsCreated: 0,
+      totalSessionsCompleted: 0,
+    };
+  }
 
   // Check for duplicate IDs in companions array
   const companionIds = companions.map((c) => c.id);
@@ -36,7 +44,6 @@ const Profile = async () => {
   if (duplicateCompanionIds.length > 0) {
     console.log("Duplicate companion IDs found:", duplicateCompanionIds);
   }
-
   return (
     <main className="min-lg:w-3/4">
       <section className="flex justify-between gap-4 max-lg:flex-col max-lg:items-start max-sm:flex-col items-center">
@@ -67,7 +74,9 @@ const Profile = async () => {
                 width={22}
                 height={22}
               />
-              <p className="stat-number">{sessionHistory.length}</p>
+              <p className="stat-number">
+                {lifetimeStats.totalSessionsCompleted}
+              </p>
             </div>
             <div className="stat-label">Lessons completed</div>
           </div>
@@ -75,7 +84,9 @@ const Profile = async () => {
           <div className="stat-box">
             <div className="flex gap-2 items-center justify-center">
               <Image src="/icons/cap.svg" alt="cap" width={22} height={22} />
-              <p className="stat-number">{companions.length}</p>
+              <p className="stat-number">
+                {lifetimeStats.totalCompanionsCreated}
+              </p>
             </div>
             <div className="stat-label">Companions created</div>
           </div>
@@ -132,6 +143,7 @@ const Profile = async () => {
               title=""
               companions={bookmarkedCompanions}
               keyPrefix="bookmarked"
+              emptyStateType="bookmarks"
             />
           </AccordionContent>
         </AccordionItem>
@@ -146,13 +158,14 @@ const Profile = async () => {
               title=""
               companions={sessionHistory}
               keyPrefix="recent"
+              emptyStateType="journey-sessions"
             />
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="companions">
           <AccordionTrigger className="text-2xl font-bold">
-            My Companions {`(${companions.length})`}
+            My Companions
           </AccordionTrigger>
 
           <AccordionContent>
@@ -160,6 +173,7 @@ const Profile = async () => {
               title=""
               companions={companions}
               keyPrefix="my-companions"
+              emptyStateType="companions"
             />
           </AccordionContent>
         </AccordionItem>
