@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
 
       console.log(`🗑️ Cleaning up data for deleted user: ${userId}`);
 
-      // Delete all user data from Supabase
+      // Delete all user data from Supabase with better error handling
       const deletionResults = await Promise.allSettled([
         supabase.from("user_lifetime_stats").delete().eq("user_id", userId),
         supabase.from("companions").delete().eq("author", userId),
@@ -77,23 +77,40 @@ export async function POST(request: NextRequest) {
         supabase.from("bookmarks").delete().eq("user_id", userId),
       ]);
 
-      // Log results
+      // Log results and track failures
+      const tables = [
+        "user_lifetime_stats",
+        "companions",
+        "session_history",
+        "bookmarks",
+      ];
+      let hasFailures = false;
+
       deletionResults.forEach((result, index) => {
-        const tables = [
-          "user_lifetime_stats",
-          "companions",
-          "session_history",
-          "bookmarks",
-        ];
         if (result.status === "fulfilled") {
-          console.log(`✅ Deleted from ${tables[index]}`);
+          console.log(`✅ Deleted from ${tables[index]}:`, result.value);
         } else {
           console.error(
             `❌ Failed to delete from ${tables[index]}:`,
             result.reason
           );
+          hasFailures = true;
         }
       });
+
+      // If there were failures, return an error status
+      if (hasFailures) {
+        console.error(`⚠️  Some deletions failed for user: ${userId}`);
+        return NextResponse.json(
+          {
+            error: "Partial deletion failure",
+            userId,
+            message:
+              "Some user data deletion operations failed. Check logs for details.",
+          },
+          { status: 207 } // 207 Multi-Status for partial success
+        );
+      }
 
       console.log(`✅ Successfully processed deletion for user: ${userId}`);
 
