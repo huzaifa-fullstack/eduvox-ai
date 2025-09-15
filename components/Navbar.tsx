@@ -23,6 +23,13 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Clean up overflow on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
+
   return (
     <>
       <nav className={`navbar ${isScrolled ? "navbar-scrolled" : ""}`}>
@@ -207,7 +214,10 @@ const Navbar = () => {
 
       {/* Mobile Menu - only shown when menu is open */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
+        <div
+          className="md:hidden fixed left-0 right-0 z-40 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg backdrop-blur-lg transform transition-all duration-300 ease-out"
+          style={{ top: isScrolled ? "68px" : "80px" }}
+        >
           <div className="px-4 py-4">
             <NavItems onItemClick={() => setIsMobileMenuOpen(false)} />
           </div>
