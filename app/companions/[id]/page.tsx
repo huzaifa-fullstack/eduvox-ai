@@ -67,9 +67,9 @@ const CompanionSession = async ({ params }: CompanionSessionPageProps) => {
             Monthly Conversation Limit Reached
           </h3>
           <p className="text-gray-700 mb-6 max-w-md leading-relaxed">
-            You&apos;ve completed {currentConversationCount} out of 10 conversations
-            this month with your Basic plan. Upgrade to Core or Pro for
-            unlimited conversations!
+            You&apos;ve completed {currentConversationCount} out of 10
+            conversations this month with your Basic plan. Upgrade to Core or
+            Pro for unlimited conversations!
           </p>
           <div className="flex gap-4 flex-wrap justify-center">
             <Link
