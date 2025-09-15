@@ -2,6 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +26,6 @@ import { Input } from "@/components/ui/input";
 import { subjects } from "@/constants";
 import { Textarea } from "./ui/textarea";
 import { createCompanion } from "@/lib/actions/companion.actions";
-import { redirect } from "next/navigation";
 
 const formSchema = z
   .object({
@@ -42,7 +43,10 @@ const formSchema = z
       .max(200, { message: "Topic must be less than 200 characters." }),
     voice: z.string().min(1, { message: "Voice is required." }),
     style: z.string().min(1, { message: "Style is required." }),
-    duration: z.number().min(1, { message: "Duration is required." }),
+    duration: z
+      .number()
+      .min(1, { message: "Duration is required." })
+      .max(60, { message: "Duration cannot exceed 60 minutes." }),
   })
   .refine((data) => isTopicRelevantToSubject(data.subject, data.topic), {
     message:
@@ -348,6 +352,9 @@ const isTopicRelevantToSubject = (subject: string, topic: string): boolean => {
 type FormSchema = z.infer<typeof formSchema>;
 
 const CompanionForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -361,13 +368,34 @@ const CompanionForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const companion = await createCompanion(values);
+    if (isLoading) return;
 
-    if (companion) {
-      redirect(`/companions/${companion.id}`);
-    } else {
-      console.log("Failed to create a companion");
-      redirect("/");
+    setIsLoading(true);
+    try {
+      const companion = await createCompanion(values);
+
+      if (companion) {
+        form.reset();
+        router.push(`/companions/${companion.id}`);
+      } else {
+        console.log("Failed to create a companion");
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error("Error creating companion:", error);
+
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to create companion";
+
+      if (errorMessage.includes("companion creation limit")) {
+        alert(
+          "🚫 Companion Limit Reached!\n\nYou've reached your companion creation limit for your current plan.\n\nUpgrade your subscription to create more AI companions."
+        );
+      } else {
+        alert(`Error: ${errorMessage}`);
+      }
+
+      setIsLoading(false);
     }
   };
 
@@ -509,8 +537,14 @@ const CompanionForm = () => {
                 <Input
                   type="number"
                   placeholder="15"
-                  {...field}
-                  onChange={(e) => field.onChange(Number(e.target.value))}
+                  value={field.value || ""}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    // Remove leading zeros and convert to number
+                    const numericValue =
+                      value === "" ? "" : parseInt(value, 10);
+                    field.onChange(numericValue === "" ? "" : numericValue);
+                  }}
                   className="input"
                 />
               </FormControl>
@@ -522,9 +556,10 @@ const CompanionForm = () => {
         <Button
           type="submit"
           size="lg"
-          className="w-full cursor-pointer py-4 text-base bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 transition-colors duration-200"
+          disabled={isLoading}
+          className="w-full cursor-pointer py-4 text-base bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Build Your Companion
+          {isLoading ? "Building Your Companion..." : "Build Your Companion"}
         </Button>
       </form>
     </Form>
