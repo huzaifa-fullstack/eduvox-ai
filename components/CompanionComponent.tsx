@@ -7,7 +7,12 @@ import soundwaves from "@/constants/soundwaves.json";
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 import { Message } from "@/types/vapi";
-import { addToSessionHistory } from "@/lib/actions/companion.actions";
+import {
+  addToSessionHistory,
+  checkMonthlyConversationLimit,
+} from "@/lib/actions/companion.actions";
+import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -27,14 +32,14 @@ const CompanionComponent = ({
   voice,
 }: CompanionComponentProps) => {
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
-
   const [isSpeaking, setIsSpeaking] = useState(false);
-
   const [isMuted, setIsMuted] = useState(false);
-
   const [messages, setMessages] = useState<SavedMessage[]>([]);
+  const [isCheckingLimits, setIsCheckingLimits] = useState(false);
 
   const lottieRef = useRef<LottieRefCurrentProps>(null);
+  const router = useRouter();
+  const { user } = useUser();
 
   useEffect(() => {
     if (lottieRef) {
@@ -99,17 +104,35 @@ const CompanionComponent = ({
   };
 
   const handleCall = async () => {
-    setCallStatus(CallStatus.CONNECTING);
+    if (!user?.id) {
+      console.error("User not authenticated");
+      return;
+    }
 
-    const assistantOverrides = {
-      variableValues: { subject, topic, style },
-    };
+    setIsCheckingLimits(true);
 
     try {
+      //  CHECK CONVERSATION LIMITS BEFORE STARTING CALL
+      const canStartConversation = await checkMonthlyConversationLimit(user.id);
+
+      if (!canStartConversation) {
+        // Redirect to the same page which will show the limit message
+        router.refresh();
+        return;
+      }
+
+      setCallStatus(CallStatus.CONNECTING);
+
+      const assistantOverrides = {
+        variableValues: { subject, topic, style },
+      };
+
       vapi.start(configureAssistant(voice, style), assistantOverrides);
     } catch (error) {
       console.error("Failed to start call:", error);
       setCallStatus(CallStatus.INACTIVE);
+    } finally {
+      setIsCheckingLimits(false);
     }
   };
 
@@ -194,16 +217,20 @@ const CompanionComponent = ({
             className={cn(
               "rounded-lg py-2 cursor-pointer transition-colors w-full text-white",
               callStatus === CallStatus.ACTIVE ? "bg-red-700" : "bg-primary",
-              callStatus === CallStatus.CONNECTING && "animate-pulse"
+              (callStatus === CallStatus.CONNECTING || isCheckingLimits) &&
+                "animate-pulse"
             )}
             onClick={
               callStatus === CallStatus.ACTIVE ? handleDisconnect : handleCall
             }
+            disabled={isCheckingLimits}
           >
             {callStatus === CallStatus.ACTIVE
               ? "End Session"
               : callStatus === CallStatus.CONNECTING
               ? "Connecting"
+              : isCheckingLimits
+              ? "Checking limits..."
               : "Start Session"}
           </button>
         </div>
