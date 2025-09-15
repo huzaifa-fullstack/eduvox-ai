@@ -1,6 +1,63 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# ===========================
+# SENSITIVE FILES & SECRETS
+# ===========================
+# Environment files (ALL variations)
+.env
+.env.*
+.env.local
+.env.development
+.env.test
+.env.production
+.environment
+*.env
+
+# API Keys and secrets
+secrets.json
+secrets.yaml
+secrets.yml
+config/secrets.*
+.secrets/
+private/
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.csr
+*.cer
+*.der
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+database.json
+db.json
+
+# AWS credentials
+.aws/
+aws.json
+credentials
+
+# Firebase
+firebase-adminsdk-*.json
+serviceAccountKey.json
+google-services.json
+GoogleService-Info.plist
+
+# Other sensitive configs
+.htpasswd
+.htaccess
+auth.json
+config.json
+settings.json
+app-settings.json
+
+# ===========================
+# DEPENDENCIES
+# ===========================
 /node_modules
 /.pnp
 .pnp.*
@@ -9,36 +66,142 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+pnpm-lock.yaml
 
-# env files (can opt-in for committing if needed)
-.env*
+# ===========================
+# BUILD & PRODUCTION
+# ===========================
+# Next.js
+/.next/
+/out/
+.next
 
-# vercel
+# Production builds
+/build
+/dist
+/public/build
+
+# Static files
+/static
+/.static
+
+# ===========================
+# DEVELOPMENT & TESTING
+# ===========================
+# Testing
+/coverage
+*.lcov
+.nyc_output
+jest-coverage/
+test-results/
+playwright-report/
+test-output/
+
+# IDE and Editor files
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ===========================
+# LOGS & MONITORING
+# ===========================
+# Log files
+*.log
+logs/
+log/
+*.log.*
+lerna-debug.log*
+
+# Error tracking
+.sentryclirc
+.env.sentry-build-plugin
+
+# ===========================
+# DEPLOYMENT & SERVICES
+# ===========================
+# Vercel
 .vercel
+.vercel.json
 
-# typescript
+# Docker
+.dockerignore
+docker-compose.override.yml
+Dockerfile.local
+
+# Kubernetes
+*.kubeconfig
+k8s-secrets.yaml
+
+# ===========================
+# BACKUP & TEMPORARY FILES
+# ===========================
+# Backups
+*.backup
+*.bak
+*.tmp
+*.temp
+*~
+.cache/
+.temp/
+temp/
+
+# Archives
+*.zip
+*.rar
+*.tar.gz
+*.7z
+
+# ===========================
+# TYPESCRIPT & BUILD TOOLS
+# ===========================
 *.tsbuildinfo
 next-env.d.ts
+tsconfig.tsbuildinfo
 
-# Sentry Config File
-.env.sentry-build-plugin
+# ===========================
+# MISC SECURITY
+# ===========================
+# SSL Certificates
+*.crt
+*.key
+*.pem
+ssl/
+
+# SSH Keys
+.ssh/
+id_rsa
+id_rsa.pub
+known_hosts
+
+# GPG Keys
+*.gpg
+*.asc
+
+# License files with sensitive info
+license.key
+activation.key
+
+# User uploads (potentially sensitive)
+uploads/
+user-content/
+attachments/
