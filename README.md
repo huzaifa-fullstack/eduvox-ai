@@ -1,10 +1,10 @@
 # 🎓 EduVox AI – AI-Powered Educational Voice Companion Platform
 
 ![EduVox AI](https://img.shields.io/badge/EduVox-AI%20Powered%20Education-blue?style=for-the-badge)
-![Next.js](https://img.shields.io/badge/Next.js-15.5.2-black?style=for-the-badge&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-19.1.0-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 ![Clerk](https://img.shields.io/badge/Clerk-6B46C1?style=for-the-badge&logo=clerk&logoColor=white)
 ![Vapi AI](https://img.shields.io/badge/Vapi-AI%20Voice-FF6B6B?style=for-the-badge)
@@ -28,7 +28,7 @@
 ![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Project Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
-🌐 **Live Demo:** [Coming Soon - Deploy to Production](#)
+🌐 **Live Demo:** [Click here to visitsite](https://eduvox-ai.vercel.app/)
 
 ## **Deployed on Vercel**
 
@@ -247,7 +247,7 @@ npm start
 
 ### 🏠 **Homepage - Popular Companions**
 
-![Homepage](public/screenshots/homepage.png)
+![Homepage](public/screenshots/home.png)
 
 ---
 
@@ -257,35 +257,49 @@ npm start
 
 ---
 
-### �️ **Companion Builder**
-
-![Companion Creation](public/screenshots/companion-form.png)
-
----
-
-### 🎓 **Voice Learning Session**
-
-![Learning Session](public/screenshots/voice-session.png)
-
----
-
 ### 📊 **My Learning Journey**
 
 ![Learning Journey](public/screenshots/my-journey.png)
 
 ---
 
+### 🛠️ **Companion Builder**
+
+![Companion Creation](public/screenshots/companion-builder.png)
+
+---
+
+### 🎓 **Voice Learning Session**
+
+![Learning Session](public/screenshots/session.png)
+
+---
+
+
 ### 💳 **Subscription Plans**
 
-![Subscription Page](public/screenshots/subscription.png)
+![Subscription Page](public/screenshots/subscription-plans.png)
 
 ---
 
-### 🔖 **Bookmarked Companions**
+### 🔖 **Payment Gateway**
 
-![Bookmarks](public/screenshots/bookmarks.png)
+![Payment Gateway](public/screenshots/payment.png)
 
 ---
+
+### 📈 **Companion Limit**
+
+![Companion Limit](public/screenshots/companion-limit.png)
+
+---
+
+### 📅 **Monthly Limit**
+
+![Monthly Limit](public/screenshots/monthly-limit.png)
+
+---
+
 
 ## 🎥 Preview
 
@@ -653,4 +667,4 @@ If you found this project helpful, please consider:
 
 ---
 
-© 2025 Muhammad Huzaifa Karim | EduVox AI
+© 2025 Muhammad Huzaifa Karim
