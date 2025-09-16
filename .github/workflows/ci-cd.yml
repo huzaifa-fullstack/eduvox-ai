@@ -1,0 +1,125 @@
+name: EduVox AI - CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # 🔍 QUALITY CHECKS
+  quality-check:
+    name: Code Quality & Build Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: 🔧 Install Dependencies
+        run: npm ci
+
+      - name: 🧹 Run ESLint
+        run: npm run lint
+        continue-on-error: false
+
+      - name: 🔍 TypeScript Type Check
+        run: npx tsc --noEmit
+        continue-on-error: false
+
+      - name: 🏗️ Build Project
+        run: npm run build
+        env:
+          # Add required environment variables for build
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          NEXT_PUBLIC_VAPI_WEB_TOKEN: ${{ secrets.NEXT_PUBLIC_VAPI_WEB_TOKEN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
+      - name: 📊 Build Summary
+        run: |
+          echo "✅ Build completed successfully!"
+          echo "📦 Bundle size information available in build output"
+
+  # 🔒 SECURITY AUDIT
+  security-audit:
+    name: Security & Dependency Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: 🔧 Install Dependencies
+        run: npm ci
+
+      - name: 🔒 Security Audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: 🔍 Check for Outdated Packages
+        run: npm outdated || true
+
+  # 🚀 DEPLOYMENT
+  deploy:
+    name: Deploy to Vercel
+    needs: [quality-check, security-audit]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy to Vercel (Production)
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: "--prod"
+          working-directory: ./
+
+      - name: 📝 Deployment Success Notification
+        run: |
+          echo "🎉 EduVox AI deployed successfully to production!"
+          echo "🌐 URL: https://eduvox-ai.vercel.app"
+
+  # 🔄 PREVIEW DEPLOYMENT (for PRs)
+  preview-deploy:
+    name: Preview Deployment
+    needs: [quality-check]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Deploy Preview to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+
+      - name: 📝 Preview URL Comment
+        run: |
+          echo "🔍 Preview deployment ready for testing!"
+          echo "Check the Vercel deployment for preview URL"
