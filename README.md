@@ -25,6 +25,8 @@
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=for-the-badge&logo=postcss&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![CI/CD Pipeline](https://img.shields.io/badge/CI/CD-Automated-success?style=for-the-badge&logo=githubactions&logoColor=white)
 ![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Project Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
@@ -153,6 +155,49 @@ Key highlights include:
 - [**HTML5**](https://developer.mozilla.org/en-US/docs/Web/HTML) — Semantic markup
 - [**CSS3**](https://developer.mozilla.org/en-US/docs/Web/CSS) — Advanced styling and animations
 
+### **DevOps & CI/CD**
+
+- [**GitHub Actions**](https://github.com/features/actions) — Automated CI/CD pipeline with quality checks
+- [**Vercel**](https://vercel.com/) — Serverless deployment platform with automatic deployments
+- [**ESLint & TypeScript**](https://typescript-eslint.io/) — Automated code quality and type checking
+- [**Dependency Security**](https://github.com/advisories) — Automated vulnerability scanning
+
+---
+
+## 🔄 CI/CD Pipeline
+
+### **🚀 Automated Workflow**
+
+Our CI/CD pipeline ensures **code quality**, **security**, and **reliable deployments**:
+
+#### **Quality Checks** ✅
+
+- **ESLint** — Code style and best practices validation
+- **TypeScript** — Static type checking and compilation
+- **Build Verification** — Ensures production build succeeds
+- **Dependency Audit** — Security vulnerability scanning
+
+#### **Deployment Strategy** 🌐
+
+- **Production** — Automatic deployment to [eduvox-ai.vercel.app](https://eduvox-ai.vercel.app) on `main` branch
+- **Preview** — Automatic preview deployments for pull requests
+- **Rollback** — Instant rollback capability for critical issues
+
+#### **Pipeline Triggers** 🔄
+
+- **Main Branch** → Production deployment with full quality checks
+- **Pull Requests** → Preview deployment with code review
+- **Security** → Automatic dependency updates and vulnerability alerts
+
+#### **Workflow Status** 📊
+
+```yaml
+✅ Code Quality & Build Check (1m 6s)
+✅ Security & Dependency Check (34s)
+✅ Deploy to Vercel (1m 58s)
+⏭️ Preview Deployment (PR only)
+```
+
 ---
 
 ## 🚀 Getting Started
@@ -275,7 +320,6 @@ npm start
 
 ---
 
-
 ### 💳 **Subscription Plans**
 
 ![Subscription Page](public/screenshots/subscription-plans.png)
@@ -299,7 +343,6 @@ npm start
 ![Monthly Limit](public/screenshots/monthly-limit.png)
 
 ---
-
 
 ## 🎥 Preview
 
