@@ -18,17 +18,20 @@ Thank you for your interest in contributing to **EduVox AI**! This document outl
 The `main` branch is protected with strict rules to ensure code quality and stability:
 
 #### **Required Status Checks** ✅
+
 - **Code Quality & Build Check** - ESLint, TypeScript, and build verification
 - **Security & Dependency Check** - Vulnerability scanning and dependency audit
 - **All CI/CD pipeline jobs must pass** before merging
 
 #### **Pull Request Requirements** 🔍
+
 - **Require pull request reviews** before merging
-- **Require branches to be up to date** before merging  
+- **Require branches to be up to date** before merging
 - **Restrict direct pushes** to admins only
 - **Automatic deletion** of head branches after merge
 
 #### **Quality Standards** 📊
+
 - Code must pass **ESLint** with zero errors
 - **TypeScript** compilation must succeed
 - **Build process** must complete successfully
@@ -64,16 +67,19 @@ git checkout -b fix/bug-description
 ### **3. Development Guidelines**
 
 #### **Code Quality** ✨
+
 - Follow **TypeScript** best practices
 - Use **ESLint** and fix all warnings
 - Write **clean, readable code** with proper comments
 - Follow existing **code style** and patterns
 
 #### **Commit Messages** 📝
+
 Use conventional commit format:
+
 ```
 feat: add new voice synthesis feature
-fix: resolve authentication timeout issue  
+fix: resolve authentication timeout issue
 docs: update API documentation
 style: fix code formatting
 refactor: optimize database queries
@@ -81,6 +87,7 @@ test: add unit tests for companion creation
 ```
 
 #### **Testing** 🧪
+
 - Test your changes thoroughly
 - Ensure **build process** works: `npm run build`
 - Run **linting**: `npm run lint`
@@ -89,6 +96,7 @@ test: add unit tests for companion creation
 ### **4. Submitting Changes**
 
 #### **Before Submitting** 📋
+
 - [ ] Code passes all **ESLint** checks
 - [ ] **TypeScript** compiles without errors
 - [ ] **Build** completes successfully
@@ -125,13 +133,16 @@ This ensures all code goes through proper **CI/CD validation** before reaching p
 ## 🏗️ Development Environment
 
 ### **Required Tools** 🛠️
-- **Node.js** 18+ 
+
+- **Node.js** 18+
 - **npm** or **yarn**
 - **Git**
 - **VS Code** (recommended)
 
 ### **Environment Variables** 🔐
+
 Required environment variables (add to `.env.local`):
+
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
 - `CLERK_SECRET_KEY`
 - `NEXT_PUBLIC_SUPABASE_URL`
