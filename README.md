@@ -27,6 +27,7 @@
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 ![CI/CD Pipeline](https://img.shields.io/badge/CI/CD-Automated-success?style=for-the-badge&logo=githubactions&logoColor=white)
+![Speed Insights](https://img.shields.io/badge/Speed_Insights-Performance_Monitoring-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Project Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
@@ -94,7 +95,14 @@ Key highlights include:
 - **GDPR Compliant** data processing
 - **Real-time Error Tracking** with Sentry
 
-### 📱 **Modern UX/UI**
+### � **Performance Monitoring**
+
+- **Speed Insights** — Real-time Core Web Vitals tracking
+- **Performance Analytics** — Page load and interaction metrics
+- **User Experience Optimization** — Data-driven performance improvements
+- **Vercel Integration** — Seamless monitoring dashboard
+
+### �📱 **Modern UX/UI**
 
 - **Responsive Design** (Mobile-first approach)
 - **Lottie Animations** for enhanced user experience
@@ -142,6 +150,7 @@ Key highlights include:
 ### **Monitoring & Analytics**
 
 - [**Sentry 10.11.0**](https://sentry.io/) — Error tracking and performance monitoring
+- [**Vercel Speed Insights**](https://vercel.com/docs/speed-insights) — Real-time performance monitoring and Core Web Vitals  tracking
 
 ### **Development & Build Tools**
 
