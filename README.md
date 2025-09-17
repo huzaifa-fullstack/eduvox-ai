@@ -5,6 +5,7 @@
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![ShadCN UI](https://img.shields.io/badge/ShadCN_UI-000000?style=for-the-badge&logo=shadcnui&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 ![Clerk](https://img.shields.io/badge/Clerk-6B46C1?style=for-the-badge&logo=clerk&logoColor=white)
 ![Vapi AI](https://img.shields.io/badge/Vapi-AI%20Voice-FF6B6B?style=for-the-badge)
@@ -15,8 +16,8 @@
 ![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white)
 ![Radix UI](https://img.shields.io/badge/Radix%20UI-161618?style=for-the-badge&logo=radix-ui&logoColor=white)
 ![Zod](https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white)
-![Lottie](https://img.shields.io/badge/Lottie-00D4AA?style=for-the-badge&logo=lottie&logoColor=white)
-![Lucide](https://img.shields.io/badge/Lucide-Icons-F56565?style=for-the-badge)
+![Lottie](https://img.shields.io/badge/Lottie-00D4AA?style=for-the-badge&logo=lottiefiles&logoColor=white)
+![Lucide](https://img.shields.io/badge/Lucide-Icons-F56565?style=for-the-badge&logo=lucide&logoColor=white)
 ![Svix](https://img.shields.io/badge/Svix-Webhooks-6366F1?style=for-the-badge)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
@@ -108,6 +109,7 @@ Key highlights include:
 - **Lottie Animations** for enhanced user experience
 - **Form Validation** with real-time feedback
 - **Accessibility** optimized components
+- **ShadCN UI Components** — Beautiful, accessible, and customizable React UI elements
 
 ---
 
@@ -123,6 +125,7 @@ Key highlights include:
 
 - [**Tailwind CSS 4**](https://tailwindcss.com/) — Utility-first CSS framework
 - [**Radix UI**](https://www.radix-ui.com/) — Accessible, unstyled UI primitives
+- [**ShadCN UI**](https://ui.shadcn.com/) — Beautiful, accessible React components built on Radix UI and Tailwind CSS
 - [**Class Variance Authority**](https://cva.style/) — Component variant management
 - [**Tailwind Merge**](https://github.com/dcastil/tailwind-merge) — Intelligent Tailwind class merging
 - [**Lucide React**](https://lucide.dev/) — Beautiful & consistent icon library
@@ -150,7 +153,7 @@ Key highlights include:
 ### **Monitoring & Analytics**
 
 - [**Sentry 10.11.0**](https://sentry.io/) — Error tracking and performance monitoring
-- [**Vercel Speed Insights**](https://vercel.com/docs/speed-insights) — Real-time performance monitoring and Core Web Vitals  tracking
+- [**Vercel Speed Insights**](https://vercel.com/docs/speed-insights) — Real-time performance monitoring and Core Web Vitals tracking
 
 ### **Development & Build Tools**
 
